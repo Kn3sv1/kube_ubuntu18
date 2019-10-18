@@ -1,0 +1,1 @@
+https://makandracards.com/operations/42688-how-to-remove-cloud-init-from-ubuntu

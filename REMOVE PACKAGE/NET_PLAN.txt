@@ -1,0 +1,1 @@
+https://askubuntu.com/questions/1029531/how-to-setup-a-static-ip-on-ubuntu-server-18-04
