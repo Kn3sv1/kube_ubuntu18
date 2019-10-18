@@ -1,0 +1,35 @@
+https://www.udemy.com/course/kubernetes-getting-started/learn/lecture/14398544#overview
+
+https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11482922#overview
+
+
+
+https://www.udemy.com/course/kubernetes-getting-started/
+
+
+root@masterkub1:/home/roman# kubeadm init --pod-network-cidr=10.240.0.0/16
+
+
+kubeadm join 10.114.210.10:6443 --token 6ti4d3.79nldacmyhzs52gl \
+    --discovery-token-ca-cert-hash sha256:dbe3f3876be1ba79b7f55fd71f9f5c1ff80fd49ab94d6ff91c122b77a885365a
+
+
+#kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
+#kubectl apply -f https://github.com/coreos/flannel/blob/v0.9.1/Documentation/kube-flannel.yml
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+
+root@masterkub1:/home/roman# kubectl get pods --all-namespaces
+NAMESPACE     NAME                                 READY   STATUS    RESTARTS   AGE
+kube-system   coredns-5644d7b6d9-9xldd             1/1     Running   0          13m
+kube-system   coredns-5644d7b6d9-bzn8w             1/1     Running   0          13m
+kube-system   etcd-masterkub1                      1/1     Running   0          12m
+kube-system   kube-apiserver-masterkub1            1/1     Running   0          12m
+kube-system   kube-controller-manager-masterkub1   1/1     Running   0          12m
+kube-system   kube-flannel-ds-amd64-vhdjv          1/1     Running   0          2m1s
+kube-system   kube-proxy-sbtr2                     1/1     Running   0          13m
+kube-system   kube-scheduler-masterkub1            1/1     Running   0          12m
+
+
+sudo ifconfig enp0s3 10.114.210.12 netmask 255.255.255.0
