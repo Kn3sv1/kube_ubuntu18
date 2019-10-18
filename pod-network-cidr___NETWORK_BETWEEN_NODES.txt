@@ -1,0 +1,9 @@
+https://stackoverflow.com/questions/55640834/how-to-provide-for-2-different-ip-ranges-pod-network-cidr-for-multiple-ip-ra
+
+--pod-network-cidr is for IPs of the pods that kubernetes will manage. It is not related with nodes of the cluster.
+
+For nodes, the requirement is (from Kubernetes doc: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/ ):
+
+
+MAIN:
+Full network connectivity between all machines in the cluster (public or private network is fine)
