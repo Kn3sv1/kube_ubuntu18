@@ -1,0 +1,140 @@
+https://www.edureka.co/blog/install-kubernetes-on-ubuntu
+
+
+roman@ubuntu1650:~$ sudo su
+roman@ubuntu1650:~# kubeadm init --apiserver-advertise-address=192.168.56.150 --pod-network-cidr=192.168.0.0/16
+[init] Using Kubernetes version: v1.16.2
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+kubeadm join 192.168.56.150:6443 --token pkj65b.u3re7c5f0omh84p4 \
+    --discovery-token-ca-cert-hash sha256:e802a88dc4c4b32eeb9f80908c72fb9d0c37fc17cd7a00c0c90701aa5f8df7eb
+
+
+
+
+roman@ubuntu1650:~$ kubectl get pods -o wide --all-namespaces
+
+CHANGES1:
+https://docs.projectcalico.org/v3.10/getting-started/kubernetes/
+kubectl apply -f https://docs.projectcalico.org/v3.10/manifests/calico.yaml
+
+CHANGES2:
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
+
+
+kubectl proxy
+
+r_satanovskyi@NIC1-W-PC-08455 MINGW64 ~
+$ ssh -g -L 8002:localhost:8001 -f -N roman@192.168.56.150
+
+
+
+http://localhost:8002/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+
+Step 7:
+kubectl create serviceaccount dashboard -n default
+
+kubectl create clusterrolebinding dashboard-admin -n default --clusterrole=cluster-admin --serviceaccount=default:dashboard
+
+
+kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 --decode
+
+eyJhbGciOiJSUzI1NiIsImtpZCI6IjhvOE5oeTl5OTZFczVfck5nQWE4Z1p5T29nSElodHZVMG5TQnEyek50VEkifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRhc2hib2FyZC10b2tlbi1reHZjNyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJkYXNoYm9hcmQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI4OTY2MzU0OC1mZmU3LTQ4YzctYjI0Yy1iMzg5ZWQwMWVlYmEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpkYXNoYm9hcmQifQ.EtDZHWEty8PUXKHdOm9EkRxsFfNVbAzFLjfL6GWFS-OBcFE7aX49JYdV9Z_U9K5q39-xG3e8xfAaorrR4Hi8jx-_-Tgnwbo2aCr6Wjojd9aDSvQz_7UwZi0VtO1YGutCc5ekznz3ot7vidg09yk2xL294slZ6wmgR2pHCOXt3EIVbbIQ0wzJrAq9ELDtHHdtG2jh5UXoIS_waQ3iAeG3E6sI8WwxpBejz-kZx9PAjzXN0zqK49HGZ0Petbc9EM52kApsh7SJqxBwMgh_3vjleIZOVwgPLLHxu4MbkO65tIj73PbexhO_4Mwkh1mKVJQ01mti0UdluNjeP3i7d3x6pg
+
+
+Steps For Only Kubernetes Node VM (knode):
+sudo kubeadm join 192.168.56.150:6443 --token pkj65b.u3re7c5f0omh84p4 \
+    --discovery-token-ca-cert-hash sha256:e802a88dc4c4b32eeb9f80908c72fb9d0c37fc17cd7a00c0c90701aa5f8df7eb
+
+
+
+
+
+
+
+
+
+---------------OLD BELOW ---------------
+
+
+
+
+
+
+
+
+
+
+kubeadm init --apiserver-advertise-address=192.168.56.150 --pod-network-cidr=192.168.0.0/16
+
+
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.56.101:6443 --token 8z7x7p.qsvvpryyaru0qzoi \
+    --discovery-token-ca-cert-hash sha256:9c800ffcb0a2e59eb63b46717b770f37a8103f66623446c0ba19637f2d38b0b9
+
+CHANGES:
+
+https://docs.projectcalico.org/v3.9/getting-started/kubernetes/
+
+kubectl apply -f https://docs.projectcalico.org/v3.9/manifests/calico.yaml
+
+
+CHANGES2:
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
+
+
+http://192.168.56.101:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+
+
+kubectl proxy
+
+
+curl http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+
+192.168.237.64
+
+
+https://askubuntu.com/questions/192669/port-listening-on-localhost8000-but-not-on-ip8000
+roman@ubuntu1611:~$ netstat -an | grep "LISTEN "
+Iptables may also help to forward packets from an internal IP to an external IP.
+
+
+
+
+r_satanovskyi@NIC1-W-PC-08455 MINGW64 ~
+$ ssh -g -L 8002:localhost:8001 -f -N roman@192.168.56.101
+
+
+http://localhost:8002/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
+
+AFTER ON NODE RUN:
+kubeadm join 192.168.56.101:6443 --token 8z7x7p.qsvvpryyaru0qzoi \
+    --discovery-token-ca-cert-hash sha256:9c800ffcb0a2e59eb63b46717b770f37a8103f66623446c0ba19637f2d38b0b9
+
+
+
+STOP CLUSTER:
+sudo kubeadm reset
+https://www.donaldsimpson.co.uk/2018/12/29/kubernetes-from-cluster-reset-to-up-and-running/
