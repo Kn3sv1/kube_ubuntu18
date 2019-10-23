@@ -1,3 +1,8 @@
 https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/
 
+
+NEXT BIG STEP:
+https://www.linode.com/docs/applications/containers/kubernetes/deploy-container-image-to-kubernetes/
+
+
 https://stackoverflow.com/questions/27380641/see-full-command-of-running-stopped-container-in-docker
