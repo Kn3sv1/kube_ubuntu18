@@ -1,0 +1,7 @@
+https://www.howtoforge.com/tutorial/how-to-install-kubernetes-on-ubuntu/
+
+
+
+roman@ubuntu16kub01:~$ curl 192.168.56.102:31501
+
+roman@ubuntu16kub01:~$ kubectl describe service nginx-service2
