@@ -1,0 +1,74 @@
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+
+https://www.edureka.co/blog/install-kubernetes-on-ubuntu
+
+
+
+kubelet & kubeadm:
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
+
+
+sudo kubeadm init --apiserver-advertise-address=192.168.56.101 --pod-network-cidr=192.168.0.0/16
+[init] Using Kubernetes version: v1.16.2
+
+
+kubeadm join 192.168.56.101:6443 --token qesxnt.xm3r4ne4ggalr1br \
+    --discovery-token-ca-cert-hash sha256:8ee36729907da33c98744a542404da713294aebfcd96c5a4f8eda15fd0f5b002
+
+
+
+roman@ubuntu1650:~$ kubectl get pods -o wide --all-namespaces
+
+CHANGES1:
+https://docs.projectcalico.org/v3.10/getting-started/kubernetes/
+kubectl apply -f https://docs.projectcalico.org/v3.10/manifests/calico.yaml
+
+CHANGES2:
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
+
+[START NODE/SLAVE]
+sudo kubeadm join 192.168.56.101:6443 --token qesxnt.xm3r4ne4ggalr1br \
+    --discovery-token-ca-cert-hash sha256:8ee36729907da33c98744a542404da713294aebfcd96c5a4f8eda15fd0f5b002
+
+[and after on master]
+kubectl proxy
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+
+kubectl create serviceaccount dashboard -n default
+
+kubectl create clusterrolebinding dashboard-admin -n default --clusterrole=cluster-admin --serviceaccount=default:dashboard
+
+
+--------------------
+roman@ubuntu16kub01:~$ sudo kubeadm init --apiserver-advertise-address=192.168.56.101 --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors=SystemVerification
+
+
+sudo kubeadm join 192.168.56.101:6443 --token cdwyl0.qxw3sgm2bf49syko \
+    --discovery-token-ca-cert-hash sha256:f2ed96b3ae60128f11e9bfeb4fe65295e7ea88886879e16ab956092036d51a7f
+
+
+
+PART 3:
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+roman@ubuntu16kub01:~$ apt-cache madison docker-ce
+sudo apt-get install docker-ce=5:18.09.0~3-0~ubuntu-xenial docker-ce-cli=5:18.09.0~3-0~ubuntu-xenial containerd.io
+
+roman@ubuntu16kub01:~$ docker -v
+Docker version 18.09.0, build 4d60db4
+
+
+kubeadm init --apiserver-advertise-address=192.168.56.101 --pod-network-cidr=192.168.0.0/16
+
+https://kubernetes.io/docs/setup/production-environment/container-runtimes/
+cat > /etc/docker/daemon.json <<EOF ...
+
+sudo kubeadm join 192.168.56.101:6443 --token dasr1a.jzx065zfsrv0m5p5 \
+    --discovery-token-ca-cert-hash sha256:7e86dd347af2dc51d6ebb50ba3a9c07e350e0327277980a6fa7c14ad84685e3c
+
+

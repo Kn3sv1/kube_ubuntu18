@@ -1,0 +1,25 @@
+[production]
+url = "https://videoupload.project1service.com"
+host = "videoupload.project1service.com"
+aad_url = "https://login.windows.net/mindgeek.com/oauth2/token?api-version=1.0"
+[stage]
+url = "https://stage9-videoupload.project1service.com"
+host = "stage9-videoupload.project1service.com"
+aad_url = "https://login.windows.net/mindgeek.com/oauth2/token?api-version=1.0"
+[stages]
+url = "https://stage9-videoupload.project1service.com"
+host = "stage9-videoupload.project1service.com"
+aad_url = "https://login.windows.net/mindgeek.com/oauth2/token?api-version=1.0"
+[testing]
+url = "https://stage9-videoupload.project1service.com"
+host = "stage9-videoupload.project1service.com"
+aad_url = "https://login.windows.net/mindgeek.com/oauth2/token?api-version=1.0"
+[dev]
+;url = "http://10.114.88.16"
+;host = "videoupload.theofanis.cy.mgco.io"
+;url = "http://videoupload.roman.cy.mgco.io"
+;host = "videoupload.roman.cy.mgco.io"
+url = "https://stage9-videoupload.project1service.com"
+host = "stage9-videoupload.project1service.com"
+aad_url = "https://login.windows.net/mindgeek.com/oauth2/token?api-version=1.0"
+
